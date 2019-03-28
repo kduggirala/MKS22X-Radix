@@ -24,4 +24,22 @@ public class MyLinkedList<E> {
 			}
 		}
 	}
+	public void merge(MyLinkedList<E> l1, MyLinkedList<E> l2) {
+		l1.tail.next = l2.head;
+		l1.tail = l2.tail;
+	}
+	public E getFirst() {
+		return head == null ? null : head.data;
+	}
+	public E getLast() {
+		return tail == null ? (head == null ? null : head.data) : tail.data;
+	}
+	public E pop() {
+		if (head != null) {
+			E data = head.data;
+			head = head.next;
+			return data;
+		}
+		return null;
+	}
 }
