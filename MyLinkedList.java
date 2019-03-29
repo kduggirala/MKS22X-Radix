@@ -5,6 +5,7 @@ public class MyLinkedList<E> {
 		Node next;
 		public Node(E data) {
 			this.data = data;
+			next = null;
 		}
 	}
 	
@@ -49,6 +50,7 @@ public class MyLinkedList<E> {
 	public void extend(MyLinkedList<E> l) {
 		tail.next = l.head;
 		tail = l.tail;
+		size += l.size();
 	}
 	public E getFirst() {
 		return head == null ? null : head.data;
