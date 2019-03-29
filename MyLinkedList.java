@@ -1,19 +1,40 @@
 
 public class MyLinkedList<E> {
-	private Node<E> head;
-	private Node<E> tail;
+	private class Node {
+		E data;
+		Node next;
+		public Node(E data) {
+			this.data = data;
+		}
+	}
+	
+	private Node head;
+	private Node tail;
 	private int size;
 	public MyLinkedList() {
 		head = null;
 		tail = null;
 		size = 0;
 	}
+	public String toString() {
+		StringBuffer string = new StringBuffer();
+		Node cur = head;
+		while (cur != null) {
+			string.append(cur.data + " ");
+			cur = cur.next;
+		}
+		return string.toString();
+	}
+	public void clear() {
+		head = null;
+		tail = null;
+	}
 	public void add(E element) {
 		if(head == null) {
-			head = new Node<E>(element);
+			head = new Node(element);
 		}
 		else {
-			Node<E> next = new Node<E>(element);
+			Node next = new Node(element);
 			if (tail == null) {
 				tail = next;
 				head.next = tail;
@@ -25,9 +46,9 @@ public class MyLinkedList<E> {
 		}
 		size++;
 	}
-	public void merge(MyLinkedList<E> l1, MyLinkedList<E> l2) {
-		l1.tail.next = l2.head;
-		l1.tail = l2.tail;
+	public void extend(MyLinkedList<E> l) {
+		tail.next = l.head;
+		tail = l.tail;
 	}
 	public E getFirst() {
 		return head == null ? null : head.data;
@@ -48,9 +69,9 @@ public class MyLinkedList<E> {
 		if (index < size) {
 			if (index == 0) return pop();
 			size--;
-			Node<E> cur = head.next;
-			Node<E> prev = head;
-			Node<E> next = cur.next;
+			Node cur = head.next;
+			Node prev = head;
+			Node next = cur.next;
 			for (int i = 1; i < index; i++) {
 				cur = next;
 				prev = cur;
@@ -63,5 +84,8 @@ public class MyLinkedList<E> {
 		}
 		else 
 			throw new IllegalArgumentException();
+	}
+	public int size() {
+		return size;
 	}
 }
