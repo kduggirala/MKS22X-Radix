@@ -33,30 +33,27 @@ public class MyLinkedList<E> {
 	public void add(E element) {
 		if(head == null) {
 			head = new Node(element);
+			tail = head;
 		}
 		else {
 			Node next = new Node(element);
-			if (tail == null) {
-				tail = next;
-				head.next = tail;
-			}
-			else {
-				tail.next = next;
-				tail = next;
-			}
+			tail.next = next;
+			tail = next;
 		}
 		size++;
 	}
 	public void extend(MyLinkedList<E> l) {
-		tail.next = l.head;
-		tail = l.tail;
+		if (l.head != null) {
+			tail.next = l.head;
+			tail = l.tail;
+		}
 		size += l.size();
 	}
 	public E getFirst() {
 		return head == null ? null : head.data;
 	}
 	public E getLast() {
-		return tail == null ? (head == null ? null : head.data) : tail.data;
+		return tail == null ? null : tail.data;
 	}
 	public E pop() {
 		if (head != null) {
