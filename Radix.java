@@ -1,8 +1,8 @@
 
 public class Radix {
 	public static void main(String[] args) { 
-		int[] data = new int[1000];
-		for (int i = 0; i < 1000; i++) {
+		int[] data = new int[20];
+		for (int i = 0; i < 20; i++) {
 			data[i] = (int) (Math.random() * 1000 - 500);
 		}
 		radixsort(data);
@@ -27,13 +27,14 @@ public class Radix {
 		for (int i = 1; i < length; i++) {
 			while (list.size() > 0) {
 				cur = list.pop();
-				digit = (cur / (int)Math.pow(10, i)) % 10;
+				digit = (cur / (int)Math.pow(10, i - 1)) % 10;
 				digits[10 + digit].add(cur);
 			}
 			for (int j = 2; j < 20; j++) {
 				digits[1].extend(digits[j]);
 			}
-			list = digits[1];
+			list.extend(digits[1]);
+			String s = list.toString();
 			digits[1].clear();
 		}
 		for (int i = 0; i < data.length; i++) {

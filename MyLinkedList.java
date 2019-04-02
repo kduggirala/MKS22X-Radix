@@ -44,11 +44,17 @@ public class MyLinkedList<E> {
 	}
 	public void extend(MyLinkedList<E> l) {
 		if (l.head != null) {
-			tail.next = l.head;
-			tail = l.tail;
+			if (head == null) {
+				head = l.head;
+				tail = l.tail;
+			}
+			else {
+				tail.next = l.head;
+				tail = l.tail;
+			}
 			l.clear();
+			size += l.size();
 		}
-		size += l.size();
 	}
 	public E getFirst() {
 		return head == null ? null : head.data;
