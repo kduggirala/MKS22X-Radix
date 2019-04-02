@@ -24,7 +24,7 @@ public class Radix {
 		}
 		int cur, digit;
 		int length = (int) (Math.log10(max) + 1);
-		for (int i = 1; i < length; i++) {
+		for (int i = 1; i <= length; i++) {
 			while (list.size() > 0) {
 				cur = list.pop();
 				digit = (cur / (int)Math.pow(10, i - 1)) % 10;

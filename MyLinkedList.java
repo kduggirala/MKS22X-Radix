@@ -52,8 +52,8 @@ public class MyLinkedList<E> {
 				tail.next = l.head;
 				tail = l.tail;
 			}
-			l.clear();
 			size += l.size();
+			l.clear();
 		}
 	}
 	public E getFirst() {
