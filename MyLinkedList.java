@@ -8,7 +8,6 @@ public class MyLinkedList<E> {
 			next = null;
 		}
 	}
-	
 	private Node head;
 	private Node tail;
 	private int size;
@@ -29,6 +28,7 @@ public class MyLinkedList<E> {
 	public void clear() {
 		head = null;
 		tail = null;
+		size = 0;
 	}
 	public void add(E element) {
 		if(head == null) {
@@ -46,6 +46,7 @@ public class MyLinkedList<E> {
 		if (l.head != null) {
 			tail.next = l.head;
 			tail = l.tail;
+			l.clear();
 		}
 		size += l.size();
 	}

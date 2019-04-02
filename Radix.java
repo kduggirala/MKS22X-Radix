@@ -1,12 +1,19 @@
 
 public class Radix {
 	public static void main(String[] args) { 
-	
+		int[] data = new int[1000];
+		for (int i = 0; i < 1000; i++) {
+			data[i] = (int) (Math.random() * 1000 - 500);
+		}
+		radixsort(data);
+		for (int i : data) {
+			System.out.print(i + " ");
+		}
 	}
 	@SuppressWarnings("unchecked")
 	public static void radixsort(int[] data) {
-		MyLinkedList<Integer>[] digits = (MyLinkedList<Integer>[]) new Object[20];
-		for (int i = 0; i < 20; i++) {
+		MyLinkedList<Integer>[] digits = new MyLinkedList[20];
+		for (int i = 1; i < 20; i++) {
 			digits[i] = new MyLinkedList<Integer>();
 		}
 		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
@@ -16,20 +23,21 @@ public class Radix {
 			if (Math.abs(data[i]) > max) max = Math.abs(data[i]);
 		}
 		int cur, digit;
-		for (int i = 1; i < (int)(Math.log10(max) + 1); i++) {
+		int length = (int) (Math.log10(max) + 1);
+		for (int i = 1; i < length; i++) {
 			while (list.size() > 0) {
 				cur = list.pop();
 				digit = (cur / (int)Math.pow(10, i)) % 10;
-				if (digit < 0) 
-					digits[9 + cur].add(cur);
-				else
-					digits[10 + cur].add(cur);
+				digits[10 + digit].add(cur);
 			}
-			for (int j = 1; j < 20; j++) {
-				digits[0].extend(digits[j]);
+			for (int j = 2; j < 20; j++) {
+				digits[1].extend(digits[j]);
 			}
-			list = digits[0];
-			digits[0].clear();
+			list = digits[1];
+			digits[1].clear();
+		}
+		for (int i = 0; i < data.length; i++) {
+			data[i] = list.pop();
 		}
 	}
 }
